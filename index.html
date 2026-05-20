@@ -1,0 +1,3274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shine by Shania – Organic Products</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gd: #2d5a27;
+        --gm: #4a7c3f;
+        --gl: #7ab368;
+        --gp: #c8dfc4;
+        --gmt: #eef4ec;
+        --gold: #c8962a;
+        --gol: #e8b84b;
+        --gopa: #fdf3dc;
+        --cream: #faf8f3;
+        --cr2: #f3ede0;
+        --td: #1a2e17;
+        --tm: #3d5c38;
+        --tu: #6b8a65;
+        --wh: #ffffff;
+        --sg: rgba(45, 90, 39, 0.15);
+        --sgo: rgba(200, 150, 42, 0.2);
+        --fd: "Playfair Display", serif;
+        --fb: "Cormorant Garamond", serif;
+        --fu: "DM Sans", sans-serif;
+      }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--fu);
+        background: var(--cream);
+        color: var(--td);
+        overflow-x: hidden;
+        cursor: none;
+      }
+      @media (max-width: 768px) {
+        body {
+          cursor: auto;
+        }
+      }
+
+      /* ── CURSOR (desktop only) ── */
+      #cur {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--gold);
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.2s,
+          height 0.2s,
+          background 0.2s;
+        mix-blend-mode: multiply;
+      }
+      #cur.hov {
+        width: 6px;
+        height: 6px;
+        background: var(--gd);
+      }
+      #cur.click {
+        width: 18px;
+        height: 18px;
+        background: var(--gol);
+        opacity: 0.7;
+      }
+      .trail {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9997;
+        transform: translate(-50%, -50%);
+        background: var(--gl);
+      }
+      .ripple {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9996;
+        border: 1.5px solid var(--gold);
+        animation: rippleA 0.6s ease-out forwards;
+        transform: translate(-50%, -50%);
+      }
+      @keyframes rippleA {
+        from {
+          width: 0;
+          height: 0;
+          opacity: 0.9;
+        }
+        to {
+          width: 64px;
+          height: 64px;
+          opacity: 0;
+        }
+      }
+      @media (max-width: 768px) {
+        #cur,
+        .trail {
+          display: none;
+        }
+      }
+
+      /* ── LOADER ── */
+      #loader {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: var(--gd);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        transition:
+          opacity 0.7s,
+          visibility 0.7s;
+      }
+      #loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .ld {
+        width: 55px;
+        height: 68px;
+        background: linear-gradient(135deg, var(--gol), var(--gold));
+        clip-path: polygon(50% 0%, 100% 60%, 80% 100%, 20% 100%, 0% 60%);
+        animation: lpulse 0.8s ease-in-out infinite alternate;
+        filter: drop-shadow(0 8px 24px rgba(200, 150, 42, 0.6));
+      }
+      @keyframes lpulse {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.18) translateY(-7px);
+        }
+      }
+      .lt {
+        font-family: var(--fd);
+        font-size: 2rem;
+        color: #fff;
+        text-align: center;
+      }
+      .ls {
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .lbar {
+        width: 200px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .lprog {
+        height: 100%;
+        background: var(--gold);
+        border-radius: 2px;
+        animation: lp 1.6s ease-out forwards;
+      }
+      @keyframes lp {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      /* ── PAGE TRANSITION ── */
+      #pt {
+        position: fixed;
+        inset: 0;
+        z-index: 9000;
+        background: var(--gd);
+        transform: translateY(100%);
+        transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      #pt.in {
+        transform: translateY(0);
+      }
+      #pt.out {
+        transform: translateY(-100%);
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 0 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 76px;
+        background: rgba(250, 248, 243, 0.94);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--gp);
+        transition: all 0.4s;
+      }
+      nav.sc {
+        height: 60px;
+        box-shadow: 0 4px 30px var(--sg);
+      }
+      .nl {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+      }
+      .nd {
+        width: 30px;
+        height: 38px;
+        background: linear-gradient(135deg, var(--gol), var(--gold));
+        clip-path: polygon(50% 0%, 100% 60%, 80% 100%, 20% 100%, 0% 60%);
+        filter: drop-shadow(0 3px 8px var(--sgo));
+        transition: transform 0.3s;
+      }
+      .nl:hover .nd {
+        transform: translateY(-3px) scale(1.06);
+      }
+      .ntx {
+        font-family: var(--fd);
+        font-size: 1.4rem;
+        color: var(--gd);
+        line-height: 1;
+      }
+      .ntx span {
+        font-size: 0.7rem;
+        font-family: var(--fu);
+        color: var(--tu);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        display: block;
+      }
+      .nls {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nls a {
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        color: var(--tm);
+        text-decoration: none;
+        position: relative;
+        padding: 4px 0;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+      .nls a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--gold);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s;
+      }
+      .nls a:hover::after,
+      .nls a.ac::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+      .nls a:hover,
+      .nls a.ac {
+        color: var(--gd);
+      }
+      .ncta {
+        background: var(--gd) !important;
+        color: #fff !important;
+        padding: 9px 20px !important;
+        border-radius: 100px;
+      }
+      .ncta::after {
+        display: none !important;
+      }
+      .ncta:hover {
+        background: var(--gm) !important;
+        transform: translateY(-1px);
+      }
+      .hbg {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 6px;
+      }
+      .hbg span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--gd);
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+      .mmenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--cream);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      .mmenu.open {
+        transform: translateX(0);
+      }
+      .mmenu a {
+        font-family: var(--fd);
+        font-size: 2.2rem;
+        color: var(--gd);
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .mmenu a:hover {
+        color: var(--gold);
+      }
+      .mclose {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--gm);
+        background: none;
+        border: none;
+      }
+
+      /* ── PAGES ── */
+      .page {
+        display: none;
+        min-height: 100vh;
+      }
+      .page.active {
+        display: block;
+      }
+
+      /* ══════════════════ HERO ══════════════════ */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding-top: 76px;
+      }
+      .hbgl {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 20% 50%,
+            rgba(122, 179, 104, 0.14),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(200, 150, 42, 0.09),
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 60% 85%,
+            rgba(45, 90, 39, 0.07),
+            transparent 55%
+          );
+        transition: transform 0.1s linear;
+      }
+
+      /* Floating leaves — mobile too */
+      .fl {
+        position: absolute;
+        opacity: 0.13;
+        animation: floatLeaf linear infinite;
+        pointer-events: none;
+        font-size: 1.8rem;
+      }
+      @keyframes floatLeaf {
+        0% {
+          transform: translateY(110vh) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.15;
+        }
+        90% {
+          opacity: 0.15;
+        }
+        100% {
+          transform: translateY(-10vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Particles canvas */
+      #pcanvas {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .hcont {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 800px;
+        padding: 2rem 1.5rem;
+      }
+      .hbadge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--gopa);
+        border: 1px solid rgba(200, 150, 42, 0.3);
+        border-radius: 100px;
+        padding: 8px 18px;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.8rem;
+        opacity: 0;
+        animation: fadeUp 0.8s 0.2s forwards;
+      }
+      .htitle {
+        font-family: var(--fd);
+        font-size: clamp(2.8rem, 9vw, 6rem);
+        line-height: 1.05;
+        color: var(--gd);
+        margin-bottom: 1.4rem;
+        opacity: 0;
+        animation: fadeUp 0.9s 0.4s forwards;
+      }
+      .htitle em {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .hsub {
+        font-family: var(--fb);
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
+        color: var(--tm);
+        font-weight: 300;
+        line-height: 1.7;
+        max-width: 540px;
+        margin: 0 auto 2.2rem;
+        opacity: 0;
+        animation: fadeUp 0.9s 0.6s forwards;
+      }
+      .hacts {
+        display: flex;
+        gap: 0.9rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: fadeUp 0.9s 0.8s forwards;
+      }
+      .btp {
+        background: var(--gd);
+        color: #fff;
+        padding: 14px 34px;
+        border-radius: 100px;
+        border: none;
+        cursor: pointer;
+        font-family: var(--fu);
+        font-size: 0.87rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btp::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, var(--gm), var(--gd));
+        transform: translateX(-100%);
+        transition: transform 0.4s;
+      }
+      .btp:hover::before {
+        transform: translateX(0);
+      }
+      .btp span {
+        position: relative;
+        z-index: 1;
+      }
+      .btp:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 36px var(--sg);
+      }
+      .bts {
+        background: transparent;
+        color: var(--gd);
+        padding: 14px 34px;
+        border-radius: 100px;
+        border: 1.5px solid var(--gp);
+        cursor: pointer;
+        font-family: var(--fu);
+        font-size: 0.87rem;
+        font-weight: 500;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .bts:hover {
+        border-color: var(--gm);
+        background: var(--gmt);
+        transform: translateY(-2px);
+      }
+
+      /* ── 3D ORB — visible on mobile too ── */
+      .horb {
+        position: absolute;
+        right: 2%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: min(32vw, 320px);
+        height: min(32vw, 320px);
+        perspective: 800px;
+        opacity: 0;
+        animation: fadeIn 1.2s 0.6s forwards;
+        pointer-events: none;
+      }
+      @media (max-width: 768px) {
+        .horb {
+          position: relative;
+          right: auto;
+          top: auto;
+          transform: none;
+          width: 200px;
+          height: 200px;
+          margin: 2rem auto -1rem;
+          display: block;
+        }
+        .hcont {
+          order: 2;
+        }
+        .hero {
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+      .orbi {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 35% 35%,
+          rgba(255, 255, 255, 0.9),
+          rgba(122, 179, 104, 0.35) 40%,
+          rgba(45, 90, 39, 0.65)
+        );
+        box-shadow:
+          inset -20px -20px 60px rgba(45, 90, 39, 0.4),
+          inset 20px 20px 40px rgba(255, 255, 255, 0.6),
+          0 20px 80px rgba(45, 90, 39, 0.25),
+          0 0 0 1px rgba(122, 179, 104, 0.3);
+        animation: orbR 8s linear infinite;
+        position: relative;
+      }
+      @keyframes orbR {
+        from {
+          transform: rotateY(0deg) rotateX(10deg);
+        }
+        to {
+          transform: rotateY(360deg) rotateX(10deg);
+        }
+      }
+      .or1 {
+        position: absolute;
+        inset: -18px;
+        border-radius: 50%;
+        border: 1px solid rgba(200, 150, 42, 0.25);
+        animation: rng 6s linear infinite;
+      }
+      .or2 {
+        position: absolute;
+        inset: -36px;
+        border-radius: 50%;
+        border: 1px dashed rgba(122, 179, 104, 0.2);
+        animation: rng 10s linear infinite reverse;
+      }
+      @keyframes rng {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .odrops {
+        position: absolute;
+        inset: 0;
+        animation: orbR 8s linear infinite reverse;
+      }
+      .odrop {
+        position: absolute;
+        width: 12px;
+        height: 16px;
+        background: linear-gradient(180deg, var(--gol), var(--gold));
+        clip-path: polygon(50% 0%, 100% 60%, 75% 100%, 25% 100%, 0% 60%);
+        filter: drop-shadow(0 2px 5px rgba(200, 150, 42, 0.5));
+      }
+      .hsi {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        opacity: 0;
+        animation: fadeUp 1s 1.2s forwards;
+        cursor: pointer;
+      }
+      .sline {
+        width: 1px;
+        height: 44px;
+        background: linear-gradient(to bottom, var(--gm), transparent);
+        animation: sl 1.5s ease-in-out infinite;
+      }
+      @keyframes sl {
+        0%,
+        100% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scaleY(0.5);
+          opacity: 0.4;
+        }
+      }
+      .stxt {
+        font-size: 0.66rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--tu);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* ── MARQUEE ── */
+      .mqs {
+        background: var(--gd);
+        padding: 0.85rem 0;
+        overflow: hidden;
+      }
+      .mqt {
+        display: flex;
+        gap: 2.5rem;
+        animation: mqs 22s linear infinite;
+        white-space: nowrap;
+      }
+      .mqt:hover {
+        animation-play-state: paused;
+      }
+      @keyframes mqs {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .mqi {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.73rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        flex-shrink: 0;
+      }
+      .mqd {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--gol);
+      }
+
+      /* ── SECTIONS ── */
+      .sec {
+        padding: 5.5rem 4rem;
+      }
+      .sl {
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 600;
+        margin-bottom: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .sl::before {
+        content: "";
+        width: 26px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .st {
+        font-family: var(--fd);
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        color: var(--gd);
+        line-height: 1.2;
+        margin-bottom: 1.3rem;
+      }
+      .ss {
+        font-family: var(--fb);
+        font-size: 1.02rem;
+        color: var(--tu);
+        line-height: 1.8;
+        max-width: 500px;
+      }
+
+      /* ── FEATURE CARDS with 3D tilt ── */
+      .fg {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.7rem;
+        margin-top: 3.2rem;
+      }
+      .fc {
+        background: #fff;
+        border: 1px solid var(--gp);
+        border-radius: 22px;
+        padding: 2.2rem;
+        position: relative;
+        overflow: hidden;
+        transition:
+          box-shadow 0.3s,
+          border-color 0.3s;
+        opacity: 0;
+        transform: translateY(35px) scale(0.97);
+        will-change: transform;
+        transform-style: preserve-3d;
+        cursor: default;
+      }
+      .fc.vis {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .fc::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gl), var(--gol));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s;
+      }
+      .fc.vis:hover::before {
+        transform: scaleX(1);
+      }
+      .fi {
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        background: var(--gmt);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.65rem;
+        margin-bottom: 1.3rem;
+        transition: transform 0.3s;
+      }
+      .fc:hover .fi {
+        transform: rotate(-6deg) scale(1.1) translateZ(10px);
+      }
+      .fn {
+        font-family: var(--fd);
+        font-size: 1.12rem;
+        color: var(--gd);
+        margin-bottom: 0.55rem;
+      }
+      .fd2 {
+        font-size: 0.86rem;
+        line-height: 1.7;
+        color: var(--tu);
+      }
+
+      /* ── STATS ── */
+      .stsec {
+        background: var(--gd);
+        padding: 4.5rem 4rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .stsec::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 0% 100%,
+            rgba(122, 179, 104, 0.22),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 100% 0%,
+            rgba(200, 150, 42, 0.12),
+            transparent 50%
+          );
+      }
+
+      /* 3D floating stat cards */
+      .stg {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 1.8rem;
+        position: relative;
+        z-index: 1;
+      }
+      .sti {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 20px;
+        padding: 1.8rem 1rem;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        animation: none;
+      }
+      .sti.vis {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .sti:hover {
+        background: rgba(255, 255, 255, 0.13);
+        transform: translateY(-6px) scale(1.04);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      }
+      .stn {
+        font-family: var(--fd);
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        color: var(--gol);
+        line-height: 1;
+      }
+      .stl {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 0.4rem;
+        letter-spacing: 0.04em;
+      }
+
+      /* ── H-SCROLL ── */
+      .hss {
+        padding: 5.5rem 0;
+        overflow: hidden;
+      }
+      .hsh {
+        padding: 0 4rem;
+        margin-bottom: 2.4rem;
+      }
+      .hst {
+        display: flex;
+        gap: 1.4rem;
+        padding: 1rem 4rem 1.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        cursor: grab;
+      }
+      .hst::-webkit-scrollbar {
+        display: none;
+      }
+      .hst:active {
+        cursor: grabbing;
+      }
+      .hc {
+        flex-shrink: 0;
+        width: min(290px, 80vw);
+        scroll-snap-align: start;
+        background: #fff;
+        border-radius: 22px;
+        border: 1px solid var(--gp);
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        will-change: transform;
+      }
+      .hc:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 22px 50px var(--sg);
+      }
+      .hcimg {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s;
+      }
+      .hc:hover .hcimg {
+        transform: scale(1.06);
+      }
+      .hcbody {
+        padding: 1.3rem;
+      }
+      .hctag {
+        display: inline-block;
+        padding: 3px 10px;
+        background: var(--gmt);
+        color: var(--gm);
+        border-radius: 100px;
+        font-size: 0.67rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.55rem;
+      }
+      .hct {
+        font-family: var(--fd);
+        font-size: 1.02rem;
+        color: var(--gd);
+        margin-bottom: 0.35rem;
+      }
+      .hcd {
+        font-size: 0.82rem;
+        color: var(--tu);
+        line-height: 1.6;
+      }
+
+      /* ── CTA ── */
+      .ctas {
+        text-align: center;
+        background: var(--gmt);
+      }
+
+      /* ══════════════════ PRODUCTS PAGE ══════════════════ */
+      .ph {
+        padding: 150px 4rem 70px;
+        text-align: center;
+        background: linear-gradient(180deg, var(--gmt), var(--cream));
+        position: relative;
+        overflow: hidden;
+      }
+      .ph::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 50% 0%,
+          rgba(200, 150, 42, 0.08),
+          transparent 70%
+        );
+      }
+      .pht {
+        font-family: var(--fd);
+        font-size: clamp(2.2rem, 6vw, 4rem);
+        color: var(--gd);
+        margin-bottom: 0.75rem;
+        position: relative;
+      }
+      .phs {
+        font-family: var(--fb);
+        font-size: 1.02rem;
+        color: var(--tu);
+      }
+      .pcs {
+        padding: 3rem 4rem;
+      }
+      .pcl {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-size: 0.67rem;
+        letter-spacing: 0.17em;
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: 600;
+        background: var(--gd);
+        padding: 7px 17px;
+        border-radius: 100px;
+        margin-bottom: 1.4rem;
+      }
+      .pg {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+        gap: 1.7rem;
+        margin-top: 2.2rem;
+      }
+
+      /* 3D product card */
+      .pc {
+        background: #fff;
+        border: 1px solid var(--gp);
+        border-radius: 22px;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+        transition:
+          box-shadow 0.3s,
+          border-color 0.3s;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+      .pc.vis {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .pimgw {
+        overflow: hidden;
+        position: relative;
+      }
+      .pimg {
+        width: 100%;
+        height: 205px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+      .pc:hover .pimg {
+        transform: scale(1.07);
+      }
+      .pbadge {
+        position: absolute;
+        top: 0.9rem;
+        right: 0.9rem;
+        background: var(--gold);
+        color: #fff;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        padding: 4px 9px;
+        border-radius: 100px;
+        text-transform: uppercase;
+        z-index: 2;
+      }
+      .pb {
+        padding: 1.35rem;
+      }
+      .pn {
+        font-family: var(--fd);
+        font-size: 1.05rem;
+        color: var(--gd);
+        margin-bottom: 0.35rem;
+      }
+      .ing-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.7rem;
+        color: var(--gm);
+        cursor: pointer;
+        background: var(--gmt);
+        padding: 3px 10px;
+        border-radius: 100px;
+        border: none;
+        font-family: var(--fu);
+        font-weight: 500;
+        margin-bottom: 0.7rem;
+        transition: background 0.2s;
+      }
+      .ing-toggle:hover {
+        background: var(--gp);
+      }
+      .ing-list {
+        font-size: 0.77rem;
+        color: var(--tu);
+        line-height: 1.7;
+        background: var(--gmt);
+        border-radius: 9px;
+        padding: 0.7rem 0.95rem;
+        margin-bottom: 0.75rem;
+        display: none;
+      }
+      .ing-list.open {
+        display: block;
+        animation: fadeUp 0.3s ease;
+      }
+      .pd {
+        font-size: 0.82rem;
+        color: var(--tu);
+        line-height: 1.6;
+        margin-bottom: 0.85rem;
+      }
+      .pf {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .pbtn {
+        background: var(--gd);
+        color: #fff;
+        border: none;
+        padding: 9px 17px;
+        border-radius: 100px;
+        font-size: 0.77rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .pbtn:hover {
+        background: var(--gm);
+        transform: scale(1.05);
+      }
+      .ptag {
+        font-size: 0.67rem;
+        color: var(--gm);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      /* ══════════════════ ABOUT PAGE ══════════════════ */
+      .asp {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 100vh;
+        padding-top: 76px;
+      }
+
+      /* 3D visual panel */
+      .av {
+        background: var(--gd);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        padding: 4rem;
+        min-height: 400px;
+      }
+      .av::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 30% 30%,
+            rgba(122, 179, 104, 0.32),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 70% 70%,
+            rgba(200, 150, 42, 0.15),
+            transparent 60%
+          );
+      }
+
+      /* Animated 3D grid lines */
+      .grid3d {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        opacity: 0.12;
+      }
+      .gline {
+        position: absolute;
+        background: rgba(122, 179, 104, 0.6);
+      }
+      .gline.h {
+        height: 1px;
+        left: 0;
+        right: 0;
+        animation: glineH 4s ease-in-out infinite;
+      }
+      .gline.v {
+        width: 1px;
+        top: 0;
+        bottom: 0;
+        animation: glineV 5s ease-in-out infinite;
+      }
+      @keyframes glineH {
+        0%,
+        100% {
+          transform: scaleX(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scaleX(1);
+          opacity: 1;
+        }
+      }
+      @keyframes glineV {
+        0%,
+        100% {
+          transform: scaleY(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+      }
+
+      .aorb {
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 35% 35%,
+          rgba(255, 255, 255, 0.15),
+          rgba(122, 179, 104, 0.3) 40%,
+          rgba(45, 90, 39, 0.8)
+        );
+        box-shadow: 0 0 80px rgba(122, 179, 104, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.75rem;
+        position: relative;
+        z-index: 1;
+        animation: pulse3d 4s ease-in-out infinite;
+        transform-style: preserve-3d;
+      }
+      @keyframes pulse3d {
+        0%,
+        100% {
+          transform: scale(1) rotateY(0deg);
+          box-shadow: 0 0 80px rgba(122, 179, 104, 0.4);
+        }
+        50% {
+          transform: scale(1.04) rotateY(180deg);
+          box-shadow: 0 0 130px rgba(122, 179, 104, 0.65);
+        }
+      }
+      .aot {
+        font-family: var(--fd);
+        font-size: 1.4rem;
+        color: #fff;
+        text-align: center;
+      }
+      .aos {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+      .afis {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      .afi {
+        position: absolute;
+        font-size: 1.4rem;
+        animation: afi ease-in-out infinite;
+        opacity: 0.6;
+      }
+      @keyframes afi {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-14px) rotate(8deg);
+        }
+      }
+
+      /* orbiting rings */
+      .orbit-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid rgba(200, 150, 42, 0.2);
+        animation: rng linear infinite;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .ac2 {
+        padding: 5rem 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .as p {
+        font-family: var(--fb);
+        font-size: 1rem;
+        color: var(--tm);
+        line-height: 1.9;
+        margin-bottom: 1.4rem;
+      }
+      .oc {
+        margin-top: 2rem;
+        background: var(--gmt);
+        border: 1px solid var(--gp);
+        border-radius: 18px;
+        padding: 1.35rem 1.75rem;
+        display: flex;
+        align-items: center;
+        gap: 1.3rem;
+      }
+      .oav {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: var(--gd);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--fd);
+        font-size: 1.35rem;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .on {
+        font-family: var(--fd);
+        font-size: 1rem;
+        color: var(--gd);
+      }
+      .ot {
+        font-size: 0.77rem;
+        color: var(--tu);
+        margin-top: 2px;
+      }
+      .vg {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.85rem;
+        margin-top: 1.7rem;
+      }
+      .vi {
+        background: #fff;
+        border: 1px solid var(--gp);
+        border-radius: 14px;
+        padding: 1.05rem;
+        transition: all 0.3s;
+        cursor: default;
+      }
+      .vi:hover {
+        background: var(--gmt);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 24px var(--sg);
+      }
+      .vico {
+        font-size: 1.35rem;
+        margin-bottom: 0.4rem;
+      }
+      .vnm {
+        font-weight: 600;
+        color: var(--gd);
+        font-size: 0.86rem;
+        margin-bottom: 0.2rem;
+      }
+      .vd {
+        font-size: 0.77rem;
+        color: var(--tu);
+        line-height: 1.5;
+      }
+
+      /* ══════════════════ CONTACT PAGE ══════════════════ */
+      .cl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: calc(100vh - 76px);
+        padding-top: 76px;
+      }
+      .ci {
+        background: var(--gd);
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .ci::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(200, 150, 42, 0.13),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 10% 80%,
+            rgba(122, 179, 104, 0.22),
+            transparent 60%
+          );
+      }
+
+      /* Animated particles in contact panel */
+      .cparticles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .cp {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(200, 150, 42, 0.15);
+        animation: cpFloat ease-in-out infinite;
+      }
+      @keyframes cpFloat {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-18px) scale(1.08);
+        }
+      }
+
+      .cic {
+        position: relative;
+        z-index: 1;
+      }
+      .ct {
+        font-family: var(--fd);
+        font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 1.7rem;
+      }
+      .ct em {
+        color: var(--gol);
+        font-style: italic;
+      }
+      .cdesc {
+        font-family: var(--fb);
+        font-size: 0.97rem;
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.8;
+        margin-bottom: 2.2rem;
+      }
+      .cls {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+      }
+      .cla {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+        color: #fff;
+        transition: all 0.3s;
+        padding: 0.85rem 1.1rem;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .cla:hover {
+        background: rgba(255, 255, 255, 0.13);
+        transform: translateX(5px) scale(1.01);
+        border-color: rgba(200, 150, 42, 0.4);
+      }
+      .cico {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        transition:
+          background 0.3s,
+          transform 0.3s;
+      }
+      .cla:hover .cico {
+        background: var(--gold);
+        transform: scale(1.1) rotate(-5deg);
+      }
+      .clt {
+        font-size: 0.86rem;
+      }
+      .cll {
+        font-size: 0.67rem;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 1px;
+      }
+      .clv {
+        font-weight: 500;
+      }
+      .cfs {
+        padding: 4rem;
+        background: var(--cream);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .cft {
+        font-family: var(--fd);
+        font-size: 1.85rem;
+        color: var(--gd);
+        margin-bottom: 0.35rem;
+      }
+      .cfs2 {
+        font-size: 0.87rem;
+        color: var(--tu);
+        margin-bottom: 2rem;
+      }
+      .fg2 {
+        margin-bottom: 1.25rem;
+      }
+      .fla {
+        display: block;
+        font-size: 0.76rem;
+        font-weight: 500;
+        color: var(--tm);
+        margin-bottom: 0.42rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .fi2,
+      .fta,
+      .fse {
+        width: 100%;
+        background: #fff;
+        border: 1.5px solid var(--gp);
+        border-radius: 10px;
+        padding: 12px 15px;
+        font-family: var(--fu);
+        font-size: 0.92rem;
+        color: var(--td);
+        transition: all 0.3s;
+        outline: none;
+        appearance: none;
+      }
+      .fi2:focus,
+      .fta:focus,
+      .fse:focus {
+        border-color: var(--gm);
+        box-shadow: 0 0 0 3px rgba(74, 124, 63, 0.1);
+        transform: translateY(-1px);
+      }
+      .fta {
+        resize: vertical;
+        min-height: 115px;
+      }
+      .fr {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.85rem;
+      }
+      .fsub {
+        width: 100%;
+        background: var(--gd);
+        color: #fff;
+        border: none;
+        padding: 14px;
+        border-radius: 10px;
+        font-family: var(--fu);
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .fsub:hover {
+        background: var(--gm);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 32px var(--sg);
+      }
+      .fsub:active {
+        transform: scale(0.98);
+      }
+      .fsucc {
+        display: none;
+        background: var(--gmt);
+        border: 1px solid var(--gp);
+        border-radius: 14px;
+        padding: 1.7rem;
+        text-align: center;
+        margin-top: 1rem;
+      }
+      .fsucc.show {
+        display: block;
+        animation: fadeUp 0.5s ease;
+      }
+      .fsico {
+        font-size: 2.4rem;
+        margin-bottom: 0.7rem;
+      }
+      .fstx {
+        font-family: var(--fd);
+        font-size: 1.1rem;
+        color: var(--gd);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: var(--td);
+        padding: 3.2rem 4rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .fg3 {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 2.2rem;
+        margin-bottom: 2.2rem;
+      }
+      .fbl {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 0.85rem;
+      }
+      .fld {
+        width: 25px;
+        height: 30px;
+        background: linear-gradient(135deg, var(--gol), var(--gold));
+        clip-path: polygon(50% 0%, 100% 60%, 80% 100%, 20% 100%, 0% 60%);
+      }
+      .fln {
+        font-family: var(--fd);
+        font-size: 1.15rem;
+        color: #fff;
+      }
+      .fdesc {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        max-width: 255px;
+      }
+      .fso {
+        display: flex;
+        gap: 0.55rem;
+        margin-top: 1.2rem;
+      }
+      .sb {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        transition: all 0.3s;
+      }
+      .sb:hover {
+        background: var(--gold);
+        color: #fff;
+        border-color: var(--gold);
+        transform: translateY(-3px) rotate(-5deg);
+      }
+      .fct {
+        font-family: var(--fd);
+        font-size: 0.95rem;
+        color: #fff;
+        margin-bottom: 1rem;
+      }
+      .fls2 {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .fls2 a {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+      .fls2 a:hover {
+        color: var(--gol);
+      }
+      .fbot {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 1.6rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      .fbot span {
+        font-size: 0.77rem;
+      }
+      .pw strong {
+        color: var(--gol);
+      }
+
+      /* ── REVEAL ANIMATIONS ── */
+      .rv {
+        opacity: 0;
+        transform: translateY(36px);
+        transition:
+          opacity 0.7s,
+          transform 0.7s;
+      }
+      .rv.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .rvl {
+        opacity: 0;
+        transform: translateX(-36px);
+        transition:
+          opacity 0.7s,
+          transform 0.7s;
+      }
+      .rvl.vis {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .rvr {
+        opacity: 0;
+        transform: translateX(36px);
+        transition:
+          opacity 0.7s,
+          transform 0.7s;
+      }
+      .rvr.vis {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* ── 3D TILT EFFECT (mobile-safe via JS) ── */
+      .tilt {
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      /* ══════════════════ MOBILE ══════════════════ */
+      @media (max-width: 900px) {
+        nav {
+          padding: 0 1.2rem;
+        }
+        .nls {
+          display: none;
+        }
+        .hbg {
+          display: flex;
+        }
+        .sec,
+        .pcs {
+          padding: 3.5rem 1.2rem;
+        }
+        .stsec {
+          padding: 3.5rem 1.2rem;
+        }
+        .hsh,
+        .hst {
+          padding-left: 1.2rem;
+          padding-right: 1.2rem;
+        }
+        .asp {
+          grid-template-columns: 1fr;
+        }
+        .av {
+          min-height: 320px;
+        }
+        .ac2 {
+          padding: 3.5rem 1.2rem;
+        }
+        .cl {
+          grid-template-columns: 1fr;
+        }
+        .ci,
+        .cfs {
+          padding: 3.5rem 1.2rem;
+        }
+        .fg3 {
+          grid-template-columns: 1fr;
+          gap: 1.6rem;
+        }
+        footer {
+          padding: 3rem 1.2rem;
+        }
+        .fbot {
+          flex-direction: column;
+          text-align: center;
+        }
+        .fr {
+          grid-template-columns: 1fr;
+        }
+        .ph {
+          padding: 130px 1.2rem 55px;
+        }
+        .vg {
+          grid-template-columns: 1fr 1fr;
+        }
+        /* 3D orb shows on mobile hero too */
+        .horb {
+          position: relative;
+          right: auto;
+          top: auto;
+          transform: none;
+          width: 160px;
+          height: 160px;
+          margin: 1.5rem auto;
+          opacity: 1;
+          animation: fadeIn 0.8s forwards;
+        }
+        .hero {
+          flex-direction: column;
+          padding-top: 76px;
+        }
+      }
+      @media (max-width: 480px) {
+        .htitle {
+          font-size: 2.6rem;
+        }
+        .hacts {
+          flex-direction: column;
+          align-items: center;
+        }
+        .btp,
+        .bts {
+          width: 100%;
+          text-align: center;
+          padding: 14px 20px;
+        }
+        .vg {
+          grid-template-columns: 1fr;
+        }
+        .pg {
+          grid-template-columns: 1fr;
+        }
+        .aorb {
+          width: 200px;
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loader -->
+    <div id="loader">
+      <div class="ld"></div>
+      <div class="lt">Shine by Shania</div>
+      <div class="ls">Organic &amp; Natural</div>
+      <div class="lbar"><div class="lprog"></div></div>
+    </div>
+
+    <div id="pt"></div>
+    <div id="cur"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mmenu" id="mmenu">
+      <button class="mclose" id="mc">✕</button>
+      <a onclick="navTo('home')">Home</a>
+      <a onclick="navTo('products')">Products</a>
+      <a onclick="navTo('about')">About</a>
+      <a onclick="navTo('contact')">Contact</a>
+    </div>
+
+    <!-- Nav -->
+    <nav id="nb">
+      <div class="nl" onclick="navTo('home')">
+        <div class="nd"></div>
+        <div class="ntx">Shine by Shania<span>Organic Products</span></div>
+      </div>
+      <ul class="nls">
+        <li><a onclick="navTo('home')" data-p="home" class="ac">Home</a></li>
+        <li><a onclick="navTo('products')" data-p="products">Products</a></li>
+        <li><a onclick="navTo('about')" data-p="about">About</a></li>
+        <li>
+          <a onclick="navTo('contact')" data-p="contact" class="ncta"
+            >Contact Us</a
+          >
+        </li>
+      </ul>
+      <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+    </nav>
+
+    <!-- ═══════════════════════ HOME ═══════════════════════ -->
+    <div class="page active" id="page-home">
+      <section class="hero" id="heroSec">
+        <div class="hbgl" id="hbgl"></div>
+        <canvas id="pcanvas"></canvas>
+
+        <!-- Floating leaves (mobile too) -->
+        <div
+          class="fl"
+          style="left: 4%; animation-duration: 12s; animation-delay: 0s"
+        >
+          🌿
+        </div>
+        <div
+          class="fl"
+          style="
+            left: 13%;
+            animation-duration: 15s;
+            animation-delay: 3s;
+            font-size: 1.3rem;
+          "
+        >
+          🍃
+        </div>
+        <div
+          class="fl"
+          style="left: 85%; animation-duration: 10s; animation-delay: 1s"
+        >
+          🌱
+        </div>
+        <div
+          class="fl"
+          style="
+            left: 93%;
+            animation-duration: 14s;
+            animation-delay: 5s;
+            font-size: 1rem;
+          "
+        >
+          🌿
+        </div>
+        <div
+          class="fl"
+          style="
+            left: 52%;
+            animation-duration: 11s;
+            animation-delay: 2s;
+            font-size: 0.8rem;
+          "
+        >
+          ✦
+        </div>
+        <div
+          class="fl"
+          style="
+            left: 28%;
+            animation-duration: 13s;
+            animation-delay: 4s;
+            font-size: 1.1rem;
+          "
+        >
+          🌸
+        </div>
+        <div
+          class="fl"
+          style="
+            left: 68%;
+            animation-duration: 9s;
+            animation-delay: 6s;
+            font-size: 0.9rem;
+          "
+        >
+          🍃
+        </div>
+
+        <!-- 3D Orb — shown on both desktop and mobile -->
+        <div class="horb" id="heroOrb">
+          <div class="or1"></div>
+          <div class="or2"></div>
+          <div class="orbi">
+            <div class="odrops">
+              <div class="odrop" style="top: 14%; left: 44%"></div>
+              <div
+                class="odrop"
+                style="top: 38%; left: 68%; width: 9px; height: 12px"
+              ></div>
+              <div
+                class="odrop"
+                style="top: 60%; left: 24%; width: 7px; height: 9px"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hcont">
+          <div class="hbadge">✦ 100% Organic &amp; Natural Hair Care</div>
+          <h1 class="htitle">Let Your Hair<br /><em>Shine</em> Naturally</h1>
+          <p class="hsub">
+            Premium organic hair care crafted with love by Shania Raza. Pure
+            ingredients, extraordinary results — because your hair deserves the
+            best nature has to offer.
+          </p>
+          <div class="hacts">
+            <button class="btp" onclick="navTo('products')">
+              <span>✦ Explore Collection</span>
+            </button>
+            <button class="bts" onclick="navTo('about')">Our Story</button>
+          </div>
+        </div>
+
+        <div class="hsi">
+          <div class="stxt">Scroll</div>
+          <div class="sline"></div>
+        </div>
+      </section>
+
+      <!-- Marquee -->
+      <div class="mqs">
+        <div class="mqt">
+          <div class="mqi"><span class="mqd"></span>100% Organic</div>
+          <div class="mqi"><span class="mqd"></span>Sulphate Free</div>
+          <div class="mqi"><span class="mqd"></span>Dermatologist Tested</div>
+          <div class="mqi"><span class="mqd"></span>Cruelty Free</div>
+          <div class="mqi"><span class="mqd"></span>Natural Ingredients</div>
+          <div class="mqi"><span class="mqd"></span>Paraben Free</div>
+          <div class="mqi"><span class="mqd"></span>Made with Love</div>
+          <div class="mqi"><span class="mqd"></span>Shania Raza's Choice</div>
+          <div class="mqi"><span class="mqd"></span>100% Organic</div>
+          <div class="mqi"><span class="mqd"></span>Sulphate Free</div>
+          <div class="mqi"><span class="mqd"></span>Dermatologist Tested</div>
+          <div class="mqi"><span class="mqd"></span>Cruelty Free</div>
+          <div class="mqi"><span class="mqd"></span>Natural Ingredients</div>
+          <div class="mqi"><span class="mqd"></span>Paraben Free</div>
+          <div class="mqi"><span class="mqd"></span>Made with Love</div>
+          <div class="mqi"><span class="mqd"></span>Shania Raza's Choice</div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <section class="sec">
+        <div class="rv">
+          <div class="sl">Why Choose Us</div>
+          <h2 class="st">Nature's Best,<br />For Your Best Hair</h2>
+          <p class="ss">
+            Every bottle crafted with premium organic ingredients to nurture,
+            strengthen and transform.
+          </p>
+        </div>
+        <div class="fg">
+          <div class="fc tilt rv" style="transition-delay: 0.07s">
+            <div class="fi">🌿</div>
+            <div class="fn">100% Organic</div>
+            <div class="fd2">
+              Sourced from certified organic farms. No synthetic chemicals —
+              just pure botanical goodness.
+            </div>
+          </div>
+          <div class="fc tilt rv" style="transition-delay: 0.14s">
+            <div class="fi">💧</div>
+            <div class="fn">Deep Nourishment</div>
+            <div class="fd2">
+              Each formula penetrates deep into the hair shaft, delivering
+              essential nutrients where needed most.
+            </div>
+          </div>
+          <div class="fc tilt rv" style="transition-delay: 0.21s">
+            <div class="fi">🌸</div>
+            <div class="fn">Gentle Formula</div>
+            <div class="fd2">
+              Safe for all hair types including colour-treated, sensitive scalp
+              and chemically processed hair.
+            </div>
+          </div>
+          <div class="fc tilt rv" style="transition-delay: 0.28s">
+            <div class="fi">✨</div>
+            <div class="fn">Visible Results</div>
+            <div class="fd2">
+              See and feel the difference from the very first wash. Softer,
+              shinier, stronger hair — guaranteed.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="stsec">
+        <div class="stg">
+          <div class="sti rv">
+            <div class="stn" data-c="2000">0</div>
+            <div class="stl">Happy Customers</div>
+          </div>
+          <div class="sti rv" style="transition-delay: 0.1s">
+            <div class="stn" data-c="15">0</div>
+            <div class="stl">Organic Products</div>
+          </div>
+          <div class="sti rv" style="transition-delay: 0.2s">
+            <div class="stn" data-c="100">0</div>
+            <div class="stl">% Natural Ingredients</div>
+          </div>
+          <div class="sti rv" style="transition-delay: 0.3s">
+            <div class="stn" data-c="5">0</div>
+            <div class="stl">Years of Expertise</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- H-scroll -->
+      <section class="hss">
+        <div class="hsh rv">
+          <div class="sl">Best Sellers</div>
+          <h2 class="st">Our Customers Love</h2>
+        </div>
+        <div class="hst" id="hst">
+          <div class="hc">
+            <img
+              class="hcimg"
+              src = "image/nourishing-shampoo.jpeg"
+              alt="Nourishing Shampoo"
+            />
+            <div class="hcbody">
+              <div class="hctag">Daily Care</div>
+              <div class="hct">Nourishing Shampoo</div>
+              <div class="hcd">
+                Deep moisturising with Almond, Coconut &amp; Amla Reetha.
+              </div>
+            </div>
+          </div>
+          <div class="hc">
+            <img
+              class="hcimg"
+              src = "image/olive-oil-shampoo.jpeg"
+              alt="Olive Oil Shampoo"
+            />
+            <div class="hcbody">
+              <div class="hctag">Strength</div>
+              <div class="hct">Olive Oil Shampoo</div>
+              <div class="hcd">
+                Premium olive oil with lavender for lustrous, strong hair.
+              </div>
+            </div>
+          </div>
+          <div class="hc">
+            <img
+              class="hcimg"
+              src = "image/oily-hair-shampoo.jpeg"
+              alt="Oily Hair Shampoo"
+            />
+            <div class="hcbody">
+              <div class="hctag">Targeted</div>
+              <div class="hct">Shampoo for Oily Hair</div>
+              <div class="hcd">
+                Tea tree &amp; lemon oil balance excess sebum beautifully.
+              </div>
+            </div>
+          </div>
+          <div class="hc">
+            <img
+              class="hcimg"
+              src = "image/hairfall-control.jpeg"
+              alt="Hair Fall Control"
+            />
+            <div class="hcbody">
+              <div class="hctag">Anti Hair Fall</div>
+              <div class="hct">Hair Fall Control</div>
+              <div class="hcd">
+                Rosemary &amp; Amla Reetha fortify follicles and reduce
+                breakage.
+              </div>
+            </div>
+          </div>
+          <div class="hc">
+            <img
+              class="hcimg"
+              src = "image/foaming-facewash.jpeg"
+              alt="Foaming Facewash"
+            />
+            <div class="hcbody">
+              <div class="hctag">Skin Care</div>
+              <div class="hct">Foaming Facewash</div>
+              <div class="hcd">
+                Rose Water &amp; Lavender — a gentle cleanser for radiant skin.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="sec ctas">
+        <div class="rv" style="text-align: center">
+          <div class="sl" style="justify-content: center">
+            Start Your Journey
+          </div>
+          <h2 class="st" style="margin: 0 auto 1.3rem; max-width: 480px">
+            Ready to Transform Your Hair?
+          </h2>
+          <p class="ss" style="margin: 0 auto 2rem; text-align: center">
+            Join thousands who've discovered the power of organic hair care.
+          </p>
+          <div class="hacts">
+            <button class="btp" onclick="navTo('products')">
+              <span>Shop Now ✦</span>
+            </button>
+            <button class="bts" onclick="navTo('contact')">Get in Touch</button>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="fg3">
+          <div>
+            <div class="fbl">
+              <div class="fld"></div>
+              <div class="fln">Shine by Shania</div>
+            </div>
+            <p class="fdesc">
+              Premium organic hair care crafted with love by Shania Raza.
+            </p>
+            <div class="fso">
+              <a
+                href="https://www.instagram.com/shine.byshania/"
+                target="_blank"
+                class="sb"
+                >📸</a
+              ><a
+                href="https://www.shinebyshania.com"
+                target="_blank"
+                class="sb"
+                >🌐</a
+              ><a href="tel:03336743113" class="sb">📞</a
+              ><a href="mailto:shaniaraza@gmail.com" class="sb">✉️</a>
+            </div>
+          </div>
+          <div>
+            <div class="fct">Pages</div>
+            <div class="fls2">
+              <a onclick="navTo('home')">Home</a
+              ><a onclick="navTo('products')">Products</a
+              ><a onclick="navTo('about')">About</a
+              ><a onclick="navTo('contact')">Contact</a>
+            </div>
+          </div>
+          <div>
+            <div class="fct">Contact</div>
+            <div class="fls2">
+              <a href="tel:03336743113">📞 0333 674 3113</a
+              ><a href="mailto:shaniaraza@gmail.com">✉️ shaniaraza@gmail.com</a
+              ><a href="https://www.shinebyshania.com" target="_blank"
+                >🌐 shinebyshania.com</a
+              ><a
+                href="https://www.instagram.com/shine.byshania/"
+                target="_blank"
+                >📸 @shine.byshania</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="fbot">
+          <span>© 2025 Shine by Shania. All rights reserved.</span
+          ><span class="pw">Powered by <strong>GreatPoint</strong></span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ═══════════════════════ PRODUCTS ═══════════════════════ -->
+    <div class="page" id="page-products">
+      <div class="ph">
+        <div class="sl" style="justify-content: center; margin-bottom: 0.9rem">
+          Our Collection
+        </div>
+        <h1 class="pht">Organic Hair &amp; Skin Care</h1>
+        <p class="phs">
+          Handcrafted with nature's finest. Choose your perfect match.
+        </p>
+      </div>
+      <div class="pcs">
+        <div class="pcl">🌿 Daily Care Collection</div>
+        <div class="pg">
+          <div class="pc tilt rv">
+            <div class="pimgw">
+              <img
+                class="pimg"
+              src = "image/nourishing-shampoo.jpeg"
+                alt="Nourishing Shampoo"
+              />
+              <div class="pbadge">Best Seller</div>
+            </div>
+            <div class="pb">
+              <div class="pn">Nourishing Shampoo</div>
+              <button class="ing-toggle" onclick="toggleIng(this)">
+                🌿 Ingredients ▾
+              </button>
+              <div class="ing-list">
+                Castile soap base · Almond oil · Coconut oil · Amla Reetha
+                Extract · Clove Extracts · Lemon Oil · Sweet Orange Oil · Jojoba
+                oil · Vitamin C oil · Conditioner
+              </div>
+              <div class="pd">
+                A deeply nourishing Ayurvedic blend — restores vitality and
+                shine from root to tip.
+              </div>
+              <div class="pf">
+                <span class="ptag">Daily Care</span
+                ><button class="pbtn" onclick="navTo('contact')">
+                  Enquire
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="pc tilt rv" style="transition-delay: 0.08s">
+            <div class="pimgw">
+              <img
+                class="pimg"
+              src = "image/olive-oil-shampoo.jpeg"
+                alt="Olive Oil Shampoo"
+              />
+            </div>
+            <div class="pb">
+              <div class="pn">Olive Oil Shampoo</div>
+              <button class="ing-toggle" onclick="toggleIng(this)">
+                🌿 Ingredients ▾
+              </button>
+              <div class="ing-list">
+                Castile soap base · Olive oil · Clove oil · Almond oil · Vitamin
+                E oil · Conditioner
+              </div>
+              <div class="pd">
+                Premium olive oil formula for unmatched strength and lustrous,
+                healthy hair.
+              </div>
+              <div class="pf">
+                <span class="ptag">Strength</span
+                ><button class="pbtn" onclick="navTo('contact')">
+                  Enquire
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcl" style="margin-top: 3rem">🎯 Targeted Solutions</div>
+        <div class="pg">
+          <div class="pc tilt rv">
+            <div class="pimgw">
+              <img
+                class="pimg"
+              src = "image/oily-hair-shampoo.jpeg"
+                alt="Shampoo for Oily Hair"
+              />
+              <div class="pbadge">Popular</div>
+            </div>
+            <div class="pb">
+              <div class="pn">Shampoo for Oily Hair</div>
+              <button class="ing-toggle" onclick="toggleIng(this)">
+                🌿 Ingredients ▾
+              </button>
+              <div class="ing-list">
+                Castile soap base · Baking powder · Lemon oil · Tea tree oil ·
+                Vitamin E oil · Conditioner
+              </div>
+              <div class="pd">
+                Balances sebum, eliminates excess oil and refreshes the scalp
+                all day.
+              </div>
+              <div class="pf">
+                <span class="ptag">Oily Hair</span
+                ><button class="pbtn" onclick="navTo('contact')">
+                  Enquire
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="pc tilt rv" style="transition-delay: 0.08s">
+            <div class="pimgw">
+              <img
+                class="pimg"
+              src = "image/oily-hair-shampoo.jpeg"
+                alt="Shampoo for Oily Hair Pump"
+              />
+            </div>
+            <div class="pb">
+              <div class="pn">Shampoo for Oily Hair (Pump)</div>
+              <button class="ing-toggle" onclick="toggleIng(this)">
+                🌿 Ingredients ▾
+              </button>
+              <div class="ing-list">
+                Castile soap base · Baking powder · Lemon oil · Tea tree oil ·
+                Vitamin E oil · Conditioner
+              </div>
+              <div class="pd">
+                Same powerful formula in a convenient pump bottle for daily ease
+                of use.
+              </div>
+              <div class="pf">
+                <span class="ptag">Oily Hair</span
+                ><button class="pbtn" onclick="navTo('contact')">
+                  Enquire
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="pc tilt rv" style="transition-delay: 0.16s">
+            <div class="pimgw">
+              <img
+                class="pimg"
+              src = "image/hairfall-control.jpeg"
+                alt="Hair Fall Control Shampoo"
+              />
+            </div>
+            <div class="pb">
+              <div class="pn">Hair Fall Control Shampoo</div>
+              <button class="ing-toggle" onclick="toggleIng(this)">
+                🌿 Ingredients ▾
+              </button>
+              <div class="ing-list">
+                Castile soap base · Almond oil · Rosemary oil · Coconut oil ·
+                Amla Reetha Extract · Clove Extracts · Lemon Oil · Sweet Orange
+                Oil · Jojoba oil · Vitamin E oil · Conditioner
+              </div>
+              <div class="pd">
+                Botanicals strengthen follicles and dramatically reduce hair
+                fall and breakage.
+              </div>
+              <div class="pf">
+                <span class="ptag">Anti Hair Fall</span
+                ><button class="pbtn" onclick="navTo('contact')">
+                  Enquire
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcl" style="margin-top: 3rem">🌺 Skin Care</div>
+        <div class="pg">
+          <div class="pc tilt rv">
+            <div class="pimgw">
+              <img
+                class="pimg"
+              src = "image/foaming-facewash.jpeg"
+                alt="Foaming Facewash"
+              />
+            </div>
+            <div class="pb">
+              <div class="pn">Foaming Facewash</div>
+              <button class="ing-toggle" onclick="toggleIng(this)">
+                🌿 Ingredients ▾
+              </button>
+              <div class="ing-list">
+                Castile soap base · Rose Water · Almond oil · Olive oil · Lemon
+                Oil · Lavender oil · Vitamin E oil
+              </div>
+              <div class="pd">
+                A gentle rose and lavender foaming cleanser — leaves skin soft,
+                hydrated and glowing.
+              </div>
+              <div class="pf">
+                <span class="ptag">Face Care</span
+                ><button class="pbtn" onclick="navTo('contact')">
+                  Enquire
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="pc tilt rv" style="transition-delay: 0.08s">
+            <div class="pimgw">
+              <img
+                class="pimg"
+              src = "image/oily-hair-shampoo.jpeg"
+                alt="Oily Hair Shampoo"
+              />
+              <div class="pbadge">Fan Fave</div>
+            </div>
+            <div class="pb">
+              <div class="pn">Oily Hair Shampoo</div>
+              <button class="ing-toggle" onclick="toggleIng(this)">
+                🌿 Ingredients ▾
+              </button>
+              <div class="ing-list">
+                Castile soap base · Rose Water · Husn e Yousuf · Lemon Oil ·
+                Lavender oil · Jojoba oil · Vitamin E oil
+              </div>
+              <div class="pd">
+                Brightens complexion and evens skin tone with the traditional
+                power of Husn e Yousuf.
+              </div>
+              <div class="pf">
+                <span class="ptag">Whitening</span
+                ><button class="pbtn" onclick="navTo('contact')">
+                  Enquire
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="fg3">
+          <div>
+            <div class="fbl">
+              <div class="fld"></div>
+              <div class="fln">Shine by Shania</div>
+            </div>
+            <p class="fdesc">Organic hair &amp; skin care by Shania Raza.</p>
+            <div class="fso">
+              <a
+                href="https://www.instagram.com/shine.byshania/"
+                target="_blank"
+                class="sb"
+                >📸</a
+              ><a
+                href="https://www.shinebyshania.com"
+                target="_blank"
+                class="sb"
+                >🌐</a
+              >
+            </div>
+          </div>
+          <div>
+            <div class="fct">Pages</div>
+            <div class="fls2">
+              <a onclick="navTo('home')">Home</a
+              ><a onclick="navTo('products')">Products</a
+              ><a onclick="navTo('about')">About</a
+              ><a onclick="navTo('contact')">Contact</a>
+            </div>
+          </div>
+          <div>
+            <div class="fct">Contact</div>
+            <div class="fls2">
+              <a href="tel:03336743113">📞 0333 674 3113</a
+              ><a href="mailto:shaniaraza@gmail.com">✉️ shaniaraza@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="fbot">
+          <span>© 2025 Shine by Shania. All rights reserved.</span
+          ><span class="pw">Powered by <strong>GreatPoint</strong></span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ═══════════════════════ ABOUT ═══════════════════════ -->
+    <div class="page" id="page-about">
+      <div class="asp">
+        <div class="av">
+          <!-- Animated 3D grid -->
+          <div class="grid3d">
+            <div
+              class="gline h"
+              style="top: 20%; animation-delay: 0s; animation-duration: 3.5s"
+            ></div>
+            <div
+              class="gline h"
+              style="top: 40%; animation-delay: 0.8s; animation-duration: 4s"
+            ></div>
+            <div
+              class="gline h"
+              style="top: 60%; animation-delay: 1.6s; animation-duration: 3s"
+            ></div>
+            <div
+              class="gline h"
+              style="top: 80%; animation-delay: 0.4s; animation-duration: 4.5s"
+            ></div>
+            <div
+              class="gline v"
+              style="left: 20%; animation-delay: 0.5s; animation-duration: 4s"
+            ></div>
+            <div
+              class="gline v"
+              style="left: 40%; animation-delay: 1.2s; animation-duration: 3.5s"
+            ></div>
+            <div
+              class="gline v"
+              style="left: 60%; animation-delay: 0.2s; animation-duration: 5s"
+            ></div>
+            <div
+              class="gline v"
+              style="left: 80%; animation-delay: 1s; animation-duration: 3.8s"
+            ></div>
+          </div>
+          <!-- Orbiting rings -->
+          <div
+            class="orbit-ring"
+            style="width: 320px; height: 320px; animation-duration: 12s"
+          ></div>
+          <div
+            class="orbit-ring"
+            style="
+              width: 380px;
+              height: 380px;
+              animation-duration: 18s;
+              animation-direction: reverse;
+              border-style: dashed;
+              border-color: rgba(122, 179, 104, 0.15);
+            "
+          ></div>
+          <div
+            class="orbit-ring"
+            style="
+              width: 260px;
+              height: 260px;
+              animation-duration: 8s;
+              border-color: rgba(200, 150, 42, 0.1);
+            "
+          ></div>
+          <div class="afis">
+            <div
+              class="afi"
+              style="top: 10%; left: 10%; animation-duration: 3s"
+            >
+              🌿
+            </div>
+            <div
+              class="afi"
+              style="
+                top: 18%;
+                right: 14%;
+                animation-duration: 4s;
+                animation-delay: 1s;
+              "
+            >
+              ✦
+            </div>
+            <div
+              class="afi"
+              style="
+                bottom: 20%;
+                left: 14%;
+                animation-duration: 3.5s;
+                animation-delay: 0.5s;
+              "
+            >
+              🍃
+            </div>
+            <div
+              class="afi"
+              style="
+                bottom: 10%;
+                right: 10%;
+                animation-duration: 5s;
+                animation-delay: 2s;
+              "
+            >
+              💧
+            </div>
+            <div
+              class="afi"
+              style="
+                top: 50%;
+                left: 5%;
+                animation-duration: 4s;
+                animation-delay: 1.5s;
+              "
+            >
+              🌸
+            </div>
+            <div
+              class="afi"
+              style="
+                top: 50%;
+                right: 5%;
+                animation-duration: 3s;
+                animation-delay: 0.8s;
+              "
+            >
+              🌺
+            </div>
+          </div>
+          <div class="aorb">
+            <div class="aot">Shania<br />Raza</div>
+            <div class="aos">Founder &amp; Creator</div>
+          </div>
+        </div>
+        <div class="ac2">
+          <div class="sl">Our Story</div>
+          <h2 class="st">Passion for<br />Pure Beauty</h2>
+          <div class="as">
+            <p>
+              Shine by Shania was born from a deep belief that what we put on
+              our hair matters just as much as what we put in our bodies.
+              Founded by Shania Raza, the brand emerged from personal struggle
+              with hair health and a relentless search for truly natural
+              solutions.
+            </p>
+            <p>
+              After discovering the transformative power of organic ingredients
+              — amla from ancient Ayurveda, pure aloe vera, cold-pressed olive
+              oil — Shania decided to share these gifts with the world. Every
+              product is formulated with intention, love and an unwavering
+              commitment to purity.
+            </p>
+            <p>
+              Today, Shine by Shania is trusted by thousands of customers, each
+              discovering that the most beautiful hair comes from the most
+              natural ingredients.
+            </p>
+          </div>
+          <div class="oc">
+            <div class="oav">SR</div>
+            <div>
+              <div class="on">Shania Raza</div>
+              <div class="ot">Founder &amp; CEO, Shine by Shania</div>
+            </div>
+          </div>
+          <div class="vg">
+            <div class="vi">
+              <div class="vico">🌿</div>
+              <div class="vnm">Pure &amp; Organic</div>
+              <div class="vd">
+                Every ingredient from certified organic farms.
+              </div>
+            </div>
+            <div class="vi">
+              <div class="vico">💚</div>
+              <div class="vnm">Eco-Friendly</div>
+              <div class="vd">Sustainable and cruelty-free always.</div>
+            </div>
+            <div class="vi">
+              <div class="vico">🔬</div>
+              <div class="vnm">Science-Backed</div>
+              <div class="vd">Traditional wisdom meets modern science.</div>
+            </div>
+            <div class="vi">
+              <div class="vico">❤️</div>
+              <div class="vnm">Made with Love</div>
+              <div class="vd">Shania's personal care in every bottle.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="fg3">
+          <div>
+            <div class="fbl">
+              <div class="fld"></div>
+              <div class="fln">Shine by Shania</div>
+            </div>
+            <p class="fdesc">Organic hair care by Shania Raza.</p>
+          </div>
+          <div>
+            <div class="fct">Pages</div>
+            <div class="fls2">
+              <a onclick="navTo('home')">Home</a
+              ><a onclick="navTo('products')">Products</a
+              ><a onclick="navTo('about')">About</a
+              ><a onclick="navTo('contact')">Contact</a>
+            </div>
+          </div>
+          <div>
+            <div class="fct">Contact</div>
+            <div class="fls2">
+              <a href="tel:03336743113">📞 0333 674 3113</a
+              ><a href="mailto:shaniaraza@gmail.com">✉️ shaniaraza@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="fbot">
+          <span>© 2025 Shine by Shania. All rights reserved.</span
+          ><span class="pw">Powered by <strong>GreatPoint</strong></span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ═══════════════════════ CONTACT ═══════════════════════ -->
+    <div class="page" id="page-contact">
+      <div class="cl">
+        <div class="ci">
+          <!-- Animated particles in panel -->
+          <div class="cparticles" id="cparts"></div>
+          <div class="cic">
+            <div class="sl" style="color: rgba(255, 255, 255, 0.4)">
+              Get In Touch
+            </div>
+            <h2 class="ct">Let's Talk<br />About Your <em>Hair</em></h2>
+            <p class="cdesc">
+              Questions about products? Want to place an order? Shania is here
+              to help you find your perfect organic match.
+            </p>
+            <div class="cls">
+              <a href="tel:03336743113" class="cla"
+                ><div class="cico">📞</div>
+                <div class="clt">
+                  <div class="cll">Phone / WhatsApp</div>
+                  <div class="clv">0333 674 3113</div>
+                </div></a
+              >
+              <a href="mailto:shaniaraza@gmail.com" class="cla"
+                ><div class="cico">✉️</div>
+                <div class="clt">
+                  <div class="cll">Email</div>
+                  <div class="clv">shaniaraza@gmail.com</div>
+                </div></a
+              >
+              <a
+                href="https://www.shinebyshania.com"
+                target="_blank"
+                class="cla"
+                ><div class="cico">🌐</div>
+                <div class="clt">
+                  <div class="cll">Website</div>
+                  <div class="clv">www.shinebyshania.com</div>
+                </div></a
+              >
+              <a
+                href="https://www.instagram.com/shine.byshania/"
+                target="_blank"
+                class="cla"
+                ><div class="cico">📸</div>
+                <div class="clt">
+                  <div class="cll">Instagram</div>
+                  <div class="clv">@shine.byshania</div>
+                </div></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="cfs">
+          <div class="cft">Send a Message</div>
+          <p class="cfs2">
+            Fill in the form and we'll get back to you within 24 hours.
+          </p>
+          <form id="cf" onsubmit="doSub(event)">
+            <div class="fr">
+              <div class="fg2">
+                <label class="fla">First Name *</label
+                ><input type="text" class="fi2" placeholder="Aisha" required />
+              </div>
+              <div class="fg2">
+                <label class="fla">Last Name</label
+                ><input type="text" class="fi2" placeholder="Khan" />
+              </div>
+            </div>
+            <div class="fg2">
+              <label class="fla">Email *</label
+              ><input
+                type="email"
+                class="fi2"
+                placeholder="aisha@example.com"
+                required
+              />
+            </div>
+            <div class="fg2">
+              <label class="fla">Phone</label
+              ><input type="tel" class="fi2" placeholder="+92 300 0000000" />
+            </div>
+            <div class="fg2">
+              <label class="fla">Interested in</label
+              ><select class="fse">
+                <option>Choose a product...</option>
+                <option>Nourishing Shampoo</option>
+                <option>Olive Oil Shampoo</option>
+                <option>Shampoo for Oily Hair</option>
+                <option>Hair Fall Control Shampoo</option>
+                <option>Foaming Facewash</option>
+                <option>Whitening Face Wash</option>
+                <option>General Enquiry</option>
+              </select>
+            </div>
+            <div class="fg2">
+              <label class="fla">Message *</label
+              ><textarea
+                class="fta"
+                placeholder="Tell us about your hair type and what you're looking for..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="fsub">✦ Send Message</button>
+          </form>
+          <div class="fsucc" id="fsucc">
+            <div class="fsico">🌿</div>
+            <div class="fstx">Message Sent!</div>
+            <p
+              style="font-size: 0.85rem; color: var(--tu); margin-top: 0.35rem"
+            >
+              Thank you! Shania will reply within 24 hours. ✨
+            </p>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="fg3">
+          <div>
+            <div class="fbl">
+              <div class="fld"></div>
+              <div class="fln">Shine by Shania</div>
+            </div>
+            <p class="fdesc">Organic hair &amp; skin care by Shania Raza.</p>
+          </div>
+          <div>
+            <div class="fct">Pages</div>
+            <div class="fls2">
+              <a onclick="navTo('home')">Home</a
+              ><a onclick="navTo('products')">Products</a
+              ><a onclick="navTo('about')">About</a
+              ><a onclick="navTo('contact')">Contact</a>
+            </div>
+          </div>
+          <div>
+            <div class="fct">Contact</div>
+            <div class="fls2">
+              <a href="tel:03336743113">📞 0333 674 3113</a
+              ><a href="mailto:shaniaraza@gmail.com">✉️ shaniaraza@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="fbot">
+          <span>© 2025 Shine by Shania. All rights reserved.</span
+          ><span class="pw">Powered by <strong>GreatPoint</strong></span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // ══════════════════ CURSOR ══════════════════
+      const isMobile = window.innerWidth <= 768 || "ontouchstart" in window;
+      const cur = document.getElementById("cur");
+      let mx = 0,
+        my = 0;
+
+      if (!isMobile) {
+        const TRAIL_N = 10;
+        const trails = [];
+        const positions = Array.from({ length: TRAIL_N }, () => {
+          return { x: 0, y: 0 };
+        });
+
+        for (let i = 0; i < TRAIL_N; i++) {
+          const d = document.createElement("div");
+          d.className = "trail";
+          document.body.appendChild(d);
+          trails.push(d);
+        }
+
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          cur.style.left = mx + "px";
+          cur.style.top = my + "px";
+        });
+
+        function animTrail() {
+          positions.unshift({ x: mx, y: my });
+          positions.length = TRAIL_N;
+          trails.forEach((t, i) => {
+            const p = positions[i];
+            t.style.left = p.x + "px";
+            t.style.top = p.y + "px";
+            t.style.opacity = (1 - i / TRAIL_N) * 0.5 + "";
+            const s = 6 - i * 0.45;
+            t.style.width = s + "px";
+            t.style.height = s + "px";
+          });
+          requestAnimationFrame(animTrail);
+        }
+        animTrail();
+
+        document.addEventListener("mousedown", (e) => {
+          cur.classList.add("click");
+          const r = document.createElement("div");
+          r.className = "ripple";
+          r.style.left = e.clientX + "px";
+          r.style.top = e.clientY + "px";
+          document.body.appendChild(r);
+          setTimeout(() => r.remove(), 700);
+        });
+        document.addEventListener("mouseup", () =>
+          cur.classList.remove("click"),
+        );
+        document.addEventListener("mouseover", (e) => {
+          if (e.target.closest("button,a,.fc,.pc,.hc,.cla,.vi,.btp,.bts"))
+            cur.classList.add("hov");
+          else cur.classList.remove("hov");
+        });
+      }
+
+      // ══════════════════ LOADER ══════════════════
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("loader").classList.add("hidden");
+          initCanvas();
+          initContactParticles();
+          setupHDrag();
+          initAnims();
+          if (!isMobile) init3DTilt();
+        }, 1700);
+      });
+
+      // ══════════════════ NAV ══════════════════
+      window.addEventListener("scroll", () =>
+        document.getElementById("nb").classList.toggle("sc", scrollY > 50),
+      );
+      document
+        .getElementById("hbg")
+        .addEventListener("click", () =>
+          document.getElementById("mmenu").classList.add("open"),
+        );
+      document
+        .getElementById("mc")
+        .addEventListener("click", () =>
+          document.getElementById("mmenu").classList.remove("open"),
+        );
+
+      let curPage = "home";
+      function navTo(p) {
+        if (p === curPage) return;
+        document.getElementById("mmenu").classList.remove("open");
+        const pt = document.getElementById("pt");
+        pt.classList.add("in");
+        setTimeout(() => {
+          document
+            .querySelectorAll(".page")
+            .forEach((x) => x.classList.remove("active"));
+          document.getElementById("page-" + p).classList.add("active");
+          curPage = p;
+          window.scrollTo(0, 0);
+          document
+            .querySelectorAll(".nls a")
+            .forEach((a) => a.classList.toggle("ac", a.dataset.p === p));
+          pt.classList.remove("in");
+          pt.classList.add("out");
+          setTimeout(() => {
+            pt.classList.remove("out");
+            initAnims();
+          }, 500);
+        }, 480);
+      }
+
+      // ══════════════════ CANVAS PARTICLES ══════════════════
+      function initCanvas() {
+        const canvas = document.getElementById("pcanvas");
+        if (!canvas) return;
+        const hero = document.getElementById("heroSec");
+        const ctx = canvas.getContext("2d");
+        let w,
+          h,
+          particles = [];
+
+        function resize() {
+          w = canvas.width = hero.offsetWidth;
+          h = canvas.height = hero.offsetHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        const colors = [
+          "rgba(122,179,104,",
+          "rgba(200,150,42,",
+          "rgba(45,90,39,",
+          "rgba(200,200,100,",
+        ];
+        const count = isMobile ? 18 : 32;
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 5 + 2,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            col: colors[Math.floor(Math.random() * colors.length)],
+            a: Math.random() * 0.5 + 0.1,
+            phase: Math.random() * Math.PI * 2,
+            speed: Math.random() * 0.015 + 0.005,
+          });
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, w, h);
+          particles.forEach((p) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.phase += p.speed;
+            const pulse = Math.sin(p.phase) * 0.3 + 0.7;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r * pulse, 0, Math.PI * 2);
+            ctx.fillStyle = p.col + p.a * pulse + ")";
+            ctx.fill();
+          });
+          requestAnimationFrame(draw);
+        }
+        draw();
+      }
+
+      // ══════════════════ CONTACT PARTICLES ══════════════════
+      function initContactParticles() {
+        const el = document.getElementById("cparts");
+        if (!el) return;
+        for (let i = 0; i < 12; i++) {
+          const d = document.createElement("div");
+          d.className = "cp";
+          const s = Math.random() * 60 + 20;
+          d.style.cssText = `width:${s}px;height:${s}px;left:${Math.random() * 100}%;top:${Math.random() * 100}%;animation-duration:${Math.random() * 4 + 3}s;animation-delay:${Math.random() * 3}s`;
+          el.appendChild(d);
+        }
+      }
+
+      // ══════════════════ SCROLL ANIMS ══════════════════
+      function initAnims() {
+        const obs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e, i) => {
+              if (e.isIntersecting) {
+                setTimeout(() => e.target.classList.add("vis"), i * 65);
+                obs.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+        );
+
+        document
+          .querySelectorAll(
+            ".page.active .rv,.page.active .rvl,.page.active .rvr,.page.active .fc,.page.active .pc,.page.active .sti",
+          )
+          .forEach((el) => {
+            el.classList.remove("vis");
+            obs.observe(el);
+          });
+
+        // Counter animation
+        document.querySelectorAll("[data-c]").forEach((el) => {
+          const t = +el.dataset.c;
+          let c = 0;
+          const s = t / 55;
+          const iv = setInterval(() => {
+            c = Math.min(c + s, t);
+            el.textContent = Math.floor(c) + (t === 100 ? "" : "+");
+            if (c >= t) clearInterval(iv);
+          }, 22);
+        });
+      }
+
+      // ══════════════════ 3D TILT (desktop + touch) ══════════════════
+      function init3DTilt() {
+        document.querySelectorAll(".tilt").forEach((card) => {
+          card.addEventListener("mousemove", (e) => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transform = `perspective(600px) rotateX(${y * -12}deg) rotateY(${x * 12}deg) translateY(-6px) scale(1.02)`;
+            card.style.boxShadow = `${x * 8}px ${y * 8}px 40px rgba(45,90,39,.2)`;
+          });
+          card.addEventListener("mouseleave", () => {
+            card.style.transform = "";
+            card.style.boxShadow = "";
+          });
+        });
+      }
+
+      // Touch 3D tilt for mobile
+      document.addEventListener(
+        "touchstart",
+        () => {
+          // Detect touch on cards and apply a gentle entrance pop
+          document.querySelectorAll(".tilt").forEach((card) => {
+            card.addEventListener(
+              "touchstart",
+              () => {
+                card.style.transform = "scale(1.03)";
+                card.style.boxShadow = "0 20px 50px rgba(45,90,39,.25)";
+              },
+              { passive: true },
+            );
+            card.addEventListener(
+              "touchend",
+              () => {
+                setTimeout(() => {
+                  card.style.transform = "";
+                  card.style.boxShadow = "";
+                }, 300);
+              },
+              { passive: true },
+            );
+          });
+        },
+        { once: true, passive: true },
+      );
+
+      // ══════════════════ PARALLAX ══════════════════
+      window.addEventListener("scroll", () => {
+        const y = scrollY;
+        const l = document.getElementById("hbgl");
+        if (l) l.style.transform = `translateY(${y * 0.22}px)`;
+      });
+
+      // ══════════════════ H-SCROLL DRAG ══════════════════
+      function setupHDrag() {
+        const t = document.getElementById("hst");
+        if (!t) return;
+        let down = false,
+          sx,
+          sl;
+        t.addEventListener("mousedown", (e) => {
+          down = true;
+          sx = e.pageX - t.offsetLeft;
+          sl = t.scrollLeft;
+        });
+        t.addEventListener("mouseleave", () => (down = false));
+        t.addEventListener("mouseup", () => (down = false));
+        t.addEventListener("mousemove", (e) => {
+          if (!down) return;
+          e.preventDefault();
+          t.scrollLeft = sl - (e.pageX - t.offsetLeft - sx) * 1.5;
+        });
+      }
+
+      // ══════════════════ GYROSCOPE 3D (mobile tilt) ══════════════════
+      if (window.DeviceOrientationEvent && isMobile) {
+        window.addEventListener(
+          "deviceorientation",
+          (e) => {
+            const tiltX = (e.beta || 0) / 30;
+            const tiltY = (e.gamma || 0) / 30;
+            const orb = document.getElementById("heroOrb");
+            if (orb) {
+              orb.style.transform = `translateY(-50%) perspective(500px) rotateX(${tiltX * -8}deg) rotateY(${tiltY * 8}deg)`;
+            }
+          },
+          { passive: true },
+        );
+      }
+
+      // ══════════════════ INGREDIENTS TOGGLE ══════════════════
+      function toggleIng(btn) {
+        const list = btn.nextElementSibling;
+        const open = list.classList.toggle("open");
+        btn.textContent = open ? "🌿 Ingredients ▴" : "🌿 Ingredients ▾";
+      }
+
+      // ══════════════════ CONTACT FORM ══════════════════
+      function doSub(e) {
+        e.preventDefault();
+        const b = e.target.querySelector(".fsub");
+        b.textContent = "Sending...";
+        b.disabled = true;
+        setTimeout(() => {
+          e.target.style.display = "none";
+          document.getElementById("fsucc").classList.add("show");
+        }, 1400);
+      }
+
+      setTimeout(initAnims, 1800);
+    </script>
+  </body>
+</html>
